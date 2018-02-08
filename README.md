@@ -1,6 +1,30 @@
 # til
 A 'Today I Learned' notebook
 
+## 8 February 2018, Thursday
+Boxed primitives *can be* `null` in Java.
+
+**Problem:** I have a method taking an `Integer` (not an `int`) as parameter. I want to get its byte value but I'm getting `NullPointerException`.
+
+**Question:** How do I work with boxed values of primitives and be null-safe?
+
+**Solution:** Don't, maybe? 😋 If you must, do a null check and convert it to an actual primitive first.
+
+**Example:**
+```java
+byte getByteUnsafe(Integer i) {
+  return i.byteValue();
+}
+
+byte getByteSafe(Integer i) {
+  int j = i; // or explicitly -> int j = i == null ? 0 : i;
+  return j.byteValue();
+}
+
+getByteUnsafe(null); // Boom!
+getByteSafe(null); // Returns 0.
+```
+
 ## 7 February 2018, Wednesday
 `BlistServlet` doesn’t support overloading for methods with special names (create, index etc.).
 
