@@ -1,6 +1,21 @@
 # til
 A 'Today I Learned' notebook
 
+## 9 February 2018, Friday
+Scala functions can't be used as Java 8 functional interfaces, at least not directly, while interoperating between Scala and Java.
+
+**Example:**
+```scala
+// Scala.scala
+class Scala(val x: Option[Int])
+```
+```java
+// Java.java
+Scala s = new Scala(scala.Option.apply(1));
+// This will not compile saying `scala.Function1<Int, Int>` is not a functional interface
+s.x().map(i -> i + 1);
+```
+
 ## 8 February 2018, Thursday
 Boxed primitives *can be* `null` in Java.
 
