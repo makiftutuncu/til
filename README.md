@@ -1,6 +1,22 @@
 # til
 A 'Today I Learned' notebook
 
+## 12 February 2018, Monday
+A combination of `ps`, `lsof` and `grep` can be used to find information about processes and the ports they listen to on macOS.
+
+**Example:**
+```bash
+$ ps aux | grep mysqld # Find process info of `mysqld`
+> akif               822   0.0  0.0  4659272   1216   ??  S    Tue11AM   0:38.40 /usr/local/opt/mysql/bin/mysqld
+
+$ lsof -nP | grep TCP | grep 822 # Find TCP port info of process with id `822`
+> mysqld      822 akif   28u     IPv4 0x74c26046e7e10dad        0t0        TCP 127.0.0.1:3306 (LISTEN)
+
+$ lsof -i tcp:3306 # Find id of the process that listens to TCP `3306` port
+> COMMAND PID USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+> mysqld  822 akif   28u  IPv4 0x74c26046e7e10dad      0t0  TCP localhost:mysql (LISTEN)
+```
+
 ## 9 February 2018, Friday
 Scala functions can't be used as Java 8 functional interfaces, at least not directly, while interoperating between Scala and Java.
 
