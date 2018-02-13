@@ -1,6 +1,36 @@
 # til
 A 'Today I Learned' notebook
 
+## 13 February 2018, Tuesday
+You can delay the execution of a [Monix](https://monix.io) `Task`. You can even define something like following to build delayed `Task`s:
+
+```scala
+import monix.eval.Task
+import scala.concurrent.duration.FiniteDuration
+
+trait Delayable[M[_]] {
+  def delay[A](t: FiniteDuration)(a: A): M[A]
+}
+
+implicit val delayableTask: Delayable[Task] = new Delayable[Task] {
+  def delay[A](t: FiniteDuration)(a: A): Task[A] = Task.pure(a).delayExecution(t)
+}
+
+def Delayable[M[_]: Delayable]: Delayable[M] = implicitly
+```
+
+Once this is in your scope, you can do stuff like this:
+
+```scala
+import monix.eval.Task
+import scala.concurrent.duration._
+
+val task1: Task[String] = Task.apply("hello")
+val task2: Task[String] = Delayable[Task].delay(3.seconds)("world")
+```
+
+Once these tasks are run, `task2` will be delayed 3 seconds.
+
 ## 12 February 2018, Monday
 A combination of `ps`, `lsof` and `grep` can be used to find information about processes and the ports they listen to on macOS.
 
