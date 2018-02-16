@@ -1,6 +1,24 @@
 # til
 A 'Today I Learned' notebook
 
+## 14 February 2018, Wednesday
+Having types is great. However, the more types get longer and more complicated, the harder it gets to keep track of things without relying on an IDE.
+
+**Example:**
+```scala
+type FnResult = (Activity, Domain.T)
+type ActivityFn[M[_]] = Message => Option[M[Option[FnResult]]]
+```
+This is a real life example of how types can go crazy. Type `ActivityFn[M[_]]` means following:
+
+>  A function taking a `Message` and returning an `Option`al of a tuple of `Activity` and `Domain.T` in some context called `M`, `Option`ally.
+
+So what to do if the complexity is inevitable?
+
+* Be explicit with types instead of letting type inference do everything. It will help in reading the code without an IDE.
+* Use type aliases where it makes sense. What would `ActivityFn[M[_]]` above would look like if `FnResult` wasn't defined as a separate type?
+* You tell me and let's update this list.
+
 ## 13 February 2018, Tuesday
 You can delay the execution of a [Monix](https://monix.io) `Task`. You can even define something like following to build delayed `Task`s:
 
