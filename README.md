@@ -1,6 +1,42 @@
 # til
 A 'Today I Learned' notebook
 
+## 19 February 2018, Monday
+In pattern matching, you need to provide stable identifiers for cases. You cannot directly use a predefined `val`. You need to put ` around the identifier or you need your identifier to start with a capital later (as it conevntionally means it is a constant).
+
+**Example:**
+```scala
+val x = 6
+
+def check(i: Int) = i match {
+  case x => "Six" // Just another value in the scope of this case
+  case _ => "Not six"
+}
+
+check(6) // This will return "Six"
+check(5) // This will return "Six"
+
+// In fact, it will always return "Six" because it assigns whatever's matched to 'x' in that case. That 'x' can be used in the case body.
+
+def check2(i: Int) = i match {
+  case `x` => "Six" // Is between `
+  case _   => "Not six"
+}
+
+check2(6) // This will return "Six"
+check2(5) // This will return "Not six"
+
+val Y = 6
+
+def check3(i: Int) = i match {
+  case Y => "Six" // Starts with uppercase
+  case _ => "Not six"
+}
+
+check3(6) // This will return "Six"
+check3(5) // This will return "Not six"
+```
+
 ## 14 February 2018, Wednesday
 Having types is great. However, the more types get longer and more complicated, the harder it gets to keep track of things without relying on an IDE.
 
