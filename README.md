@@ -1,6 +1,45 @@
 # til
 A 'Today I Learned' notebook
 
+## 20 February 2018, Tuesday
+Scala has an object called `Predef` containing many commonly used definitions and it is imported implicitly in any Scala file by default. Today I discovered a little method in `Predef` called `locally`. Here it is:
+
+```scala
+@inline def locally[T](x: T): T = x
+```
+
+It looks like it doesn't do anything at first but it is actually there to help developers avoid creating accidental dangling local blocks. Here's an example:
+
+```scala
+object Foo {
+  object Bar {
+    val x = 5
+  }
+
+  object Baz
+
+  {
+    val y = 10
+  }
+}
+```
+
+The block at the end, is it the body of `Baz` or is it a local block inside `Foo`? It is a local block. Therefore `Foo.y` compiles but `Foo.Baz.y` does not. However, it can easily be confused in such a case. This is where `locally` comes into play. If you want top create a local block, you can be more explicit about it using `locally`. Here's the same example using `locally`:
+
+```scala
+object Foo {
+  object Bar {
+    val x = 5
+  }
+
+  object Baz
+
+  locally {
+    val y = 10
+  }
+}
+```
+
 ## 19 February 2018, Monday
 In pattern matching, you need to provide stable identifiers for cases. You cannot directly use a predefined `val`. You need to put ` around the identifier or you need your identifier to start with a capital later (as it conevntionally means it is a constant).
 
