@@ -1,6 +1,15 @@
 # til
 A 'Today I Learned' notebook
 
+## 21 February 2018, Wednesday
+While working with `docker run`, `-v` parameter needs local path first and container path second. Similarly, `-p` parameter needs host port first and container port second. Here's an example:
+
+```
+docker run --name test -v $HOME/Desktop:/Desktop -p 80:9000
+```
+
+This will bind my desktop to container's `/Desktop` (in root) and it will expose container's `9000` port as `80` to me.
+
 ## 20 February 2018, Tuesday
 Scala has an object called `Predef` containing many commonly used definitions and it is imported implicitly in any Scala file by default. Today I discovered a little method in `Predef` called `locally`. Here it is:
 
