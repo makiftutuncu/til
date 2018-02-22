@@ -131,7 +131,7 @@ val task1: Task[String] = Task.apply("hello")
 val task2: Task[String] = Delayable[Task].delay(3.seconds)("world")
 ```
 
-Once these tasks are run, `task2` will be delayed 3 seconds.
+Once these tasks are run, `task2` will be delayed 3 seconds. This delay will occur before execution. There is also [`Task.delayResult`](https://github.com/monix/monix/blob/master/monix-eval/shared/src/main/scala/monix/eval/Task.scala) that will execute but delay before giving the result.
 
 ## 12 February 2018, Monday
 A combination of `ps`, `lsof` and `grep` can be used to find information about processes and the ports they listen to on macOS.
@@ -163,6 +163,8 @@ Scala s = new Scala(scala.Option.apply(1));
 // This will not compile saying `scala.Function1<Int, Int>` is not a functional interface
 s.x().map(i -> i + 1);
 ```
+
+You might want to check out [scala-java8-compat](https://github.com/scala/scala-java8-compat).
 
 ## 8 February 2018, Thursday
 Boxed primitives *can be* `null` in Java.
