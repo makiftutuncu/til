@@ -1,6 +1,15 @@
 # til
 A 'Today I Learned' notebook
 
+## 26 February 2018, Monday
+Parameters and arguments are not the same thing. A parameter, sometimes called formal parameter, belongs to the definition of a method/function. However, an argument, sometimes called actual parameter, belongs to the call of that method/function.
+
+```scala
+def shakespeare(be: Boolean): Boolean = be || !be // `be` is parameter
+
+shakespeare(2) // `2` is argument
+```
+
 ## 21 February 2018, Wednesday
 While working with `docker run`, `-v` parameter needs local path first and container path second. Similarly, `-p` parameter needs host port first and container port second. Here's an example:
 
