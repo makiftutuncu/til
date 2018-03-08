@@ -1,6 +1,31 @@
 # til
 A 'Today I Learned' notebook
 
+## 8 March 2018, Thursday
+I needed to commit with my company email `akif@vngrs.com` in my work related git repositories. To configure the committing user in a git repository, I did following:
+
+```
+git config user.email "akif@vngrs.com"
+```
+
+This sets the email config for current git repository. After running this, the commits will be authored with my work email for this repository.
+
+There's also `user.name` config and `--global` flag to set these globally, instead of the current git repository. Here's what it looks like:
+
+```
+git config --global user.name "Mehmet Akif Tütüncü"
+```
+
+Same name everywhere but different emails in different repositories, neat!
+
+What if I mistakenly make a commit with wrong email? I can reset the author of a commit by:
+
+```
+git commit --amend --reset-author
+```
+
+Of course, this needs to be run after correct email is set. This will amend author info of last commit.
+
 ## 6 March 2018, Tuesday
 Elasticsearch has a `_cat` API that you can use to list many stuff in different formats. For what it can list, check out [docs](https://www.elastic.co/guide/en/elasticsearch/reference/6.x/cat.html). Here are some examples:
 
